@@ -1,0 +1,28 @@
+# central-server is the nodejs main server.
+
+production:
+  basic_auth:
+    user: 'user'
+    password: 'pass'
+  server:
+    port: 3000
+  celery:
+    unknown: 'true'
+
+development:
+  basic_auth:
+    user: 'user'
+    password: 'pass'
+  server:
+    port: 3000
+  celery:
+    unknown: 'true'
+
+testing:
+  basic_auth:
+    user: 'user'
+    password: 'pass'
+  server:
+    port: 3000
+  celery:
+    unknown: 'true'
