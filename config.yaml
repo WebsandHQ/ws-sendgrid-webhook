@@ -6,8 +6,7 @@ production:
     password: 'pass'
   server:
     port: 3000
-  celery:
-    unknown: 'true'
+
 
 development:
   basic_auth:
@@ -15,8 +14,18 @@ development:
     password: 'pass'
   server:
     port: 3000
-  celery:
-    unknown: 'true'
+  amqp:
+    url: 'amqp://guest:guest@localhost:5672'
+    exchange:
+      name: 'webhook'
+      options:
+        durable: true
+        confirm: false
+        type: 'fanout'
+    routing_key_prefix: 'webhook_'
+  apps:
+    - 'demo'
+
 
 testing:
   basic_auth:

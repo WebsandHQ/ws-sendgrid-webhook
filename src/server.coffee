@@ -6,8 +6,11 @@ basicAuth   = require 'connect-basic-auth'
 connect     = require 'connect'
 express     = require 'express'
 
-cfg         = require('./config')('development')
+cfg         = require('./config')()
+console.log cfg
 routes      = require './routes'
+console.log "here"
+
 
 port = process.env.PORT or cfg_metrics?.port or 3000
 #set some defaults - runing thought run-coffee-development.sh will set admin:password as credentials
@@ -44,7 +47,7 @@ server.configure ->
   server.use '/static', express.static(__dirname + '/../static/')
   server.use server.router
 
-console.log __dirname
+console.log(__dirname)
 
 # server.error (err, req, res, next) ->
 server.use (err, req, res, next) ->
@@ -71,8 +74,10 @@ server.use (err, req, res, next) ->
 ###
 server.all '*', (req, res, next) -> req.requireAuthorization req, res, next
 
-server.get '/', routes.overview
-server.get '/overview', routes.overview
+server.get '/', routes.GET_overview
+server.get '/overview', routes.GET_overview
+
+server.post '/hook/:app_name', routes.POST_process_webhook
 
 # Error message.
 server.get '/500', (req, res) ->

@@ -18,9 +18,10 @@ module.exports = (env) ->
 
 init = (env) ->
   cfgObject = require(CFG_PATH)
-  # .shift()
   if process.env.PRODUCTION?
     env = 'production'
+  if process.env.DEVELOPMENT?
+    env = 'development'
   env = env ? 'testing'
   console.log "Using configuration set: #{env}"
   CFG = cfgObject[env]
