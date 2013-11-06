@@ -33,7 +33,15 @@ def on_queue_bound(frame):
 def handle_delivery(channel, method, header, body):
     """Called when we receive a message from RabbitMQ"""
     print "handle_delivery"
+    print channel
+    print method
+    print header
     print body
+    print
+    # pause for 10 seconds.
+    import time
+    time.sleep(10)
+    channel.basic_ack(method.delivery_tag)
 
 # Step #1: Connect to RabbitMQ using the default parameters (i.e. localhost, guest, port 5672)
 parameters = pika.ConnectionParameters()
