@@ -7,14 +7,14 @@ connect     = require 'connect'
 express     = require 'express'
 
 cfg         = require('./config')()
-console.log cfg
+# console.log  cfg
 routes      = require './routes'
 console.log "here"
 
 
 port = process.env.PORT or cfg_metrics?.port or 3000
 #set some defaults - runing thought run-coffee-development.sh will set admin:password as credentials
- 
+
 BASIC_USER = process.env.BASIC_USER or cfg_metrics?.basic_user or "websand"
 BASIC_PASSWORD = process.env.BASIC_PASSWORD or cfg_metrics?.basic_password or "password"
 if process.env.DEVELOPMENT?

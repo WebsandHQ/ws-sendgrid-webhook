@@ -20,7 +20,7 @@ config = config.development
 MQ_url = config.amqp?.url
 MQ_exchange_name = config.amqp?.exchange.name or throw("No exchange name given")
 MQ_exchange_options = config.amqp?.exchange?.options or {}
-MQ_routing_key = config.amqp?.routing_key
+MQ_routing_key = config.amqp?.routing_key_prefix
 MQ_apps = config.apps or []
 console.log "apps: " + MQ_apps
 
@@ -42,9 +42,7 @@ exports.publish = (payload, queue, callback) ->
   queue = MQ_routing_key + queue
   get_connection (err, connection, exchange) ->
     if err then return callback(err)
-    console.log "4"
     exchange.publish queue, payload, {mandatory: true}
-    console.log "5"
     # try
       # connection.end()
     return callback(null)
@@ -55,16 +53,13 @@ get_connection = (callback) ->
   current_callback = callback
   if connection != null then return current_callback(null, connection, exchange)
 
-  console.log "1"
   connection = amqp.createConnection()
   connection.on 'ready', ->
-    console.log "2"
-    console.log MQ_exchange_name
-    console.log MQ_exchange_options
+    # console.log MQ_exchange_name
+    # console.log MQ_exchange_options
     exchange = connection.exchange MQ_exchange_name, MQ_exchange_options
 
     exchange.on 'open', ->
-      console.log "3"
       current_callback(null, connection, exchange)
 
   connection.on 'error', (err) ->
