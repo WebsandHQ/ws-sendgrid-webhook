@@ -2,3 +2,4 @@ node_modules
 obj
 *.pyc
 config.yaml
+test/python/config.p*
