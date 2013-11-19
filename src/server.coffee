@@ -33,11 +33,11 @@ server.configure ->
     layout: false
     pretty: true
 
-  server.use basicAuth (credentials, req, res, next)->
-    if ((credentials.username == BASIC_USER) and (credentials.password == BASIC_PASSWORD))
-      next()
-    else
-      res.send 'auth_failed', 403
+  # server.use basicAuth (credentials, req, res, next)->
+  #   if ((credentials.username == BASIC_USER) and (credentials.password == BASIC_PASSWORD))
+  #     next()
+  #   else
+  #     res.send 'auth_failed', 403
 
   server.use connect.urlencoded()
   server.use connect.json()
@@ -72,7 +72,7 @@ server.use (err, req, res, next) ->
 ###
 # Routes
 ###
-server.all '*', (req, res, next) -> req.requireAuthorization req, res, next
+# server.all '*', (req, res, next) -> req.requireAuthorization req, res, next
 
 server.get '/', routes.GET_overview
 server.get '/overview', routes.GET_overview
@@ -88,6 +88,7 @@ server.get '/*', (req, res) ->
   throw new NotFound("/*")
 
 NotFound = (msg) ->
+  console.log 'Not found' + msg
   @name = 'NotFound'
   Error.call this, msg
   Error.captureStackTrace this, arguments.callee
