@@ -6,6 +6,17 @@ production:
     password: 'pass'
   server:
     port: 3000
+  amqp:
+    url: 'amqp://guest:guest@localhost:5672'
+    exchange:
+      name: 'webhook'
+      options:
+        durable: true
+        confirm: false
+        type: 'fanout'
+    routing_key_prefix: 'webhook_'
+  apps:
+    - 'devil'
 
 
 development:
