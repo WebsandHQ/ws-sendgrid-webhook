@@ -53,7 +53,7 @@ get_connection = (callback) ->
   current_callback = callback
   if connection != null then return current_callback(null, connection, exchange)
 
-  connection = amqp.createConnection()
+  connection = amqp.createConnection({url: MQ_url})
   connection.on 'ready', ->
     # console.log MQ_exchange_name
     # console.log MQ_exchange_options
