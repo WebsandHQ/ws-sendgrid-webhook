@@ -9,7 +9,6 @@ express     = require 'express'
 cfg         = require('./config')()
 # console.log  cfg
 routes      = require './routes'
-console.log "here"
 
 
 port = process.env.PORT or cfg_metrics?.port or 3000
