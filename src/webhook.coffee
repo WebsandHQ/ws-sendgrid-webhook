@@ -42,6 +42,7 @@ exports.publish = (payload, queue, callback) ->
   queue = MQ_routing_key + queue
   get_connection (err, connection, exchange) ->
     if err then return callback(err)
+    console.log "Publising to queue #{queue}"
     exchange.publish queue, payload, {mandatory: true}
     # try
       # connection.end()
