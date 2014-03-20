@@ -13,7 +13,7 @@ production:
       options:
         durable: true
         confirm: false
-        type: 'fanout'
+        type: 'direct'
     routing_key_prefix: 'webhook_'
   apps:
     - 'devil'
@@ -32,7 +32,7 @@ development:
       options:
         durable: true
         confirm: false
-        type: 'fanout'
+        type: 'direct'
     routing_key_prefix: 'webhook_'
   apps:
     - 'demo'
